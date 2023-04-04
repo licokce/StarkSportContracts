@@ -10,16 +10,10 @@ from openzeppelin.security.pausable.library import Pausable
 from openzeppelin.access.ownable.library import Ownable
 from openzeppelin.upgrades.library import Proxy
 
-@storage_var
-func call_once() -> (called: felt) {
-}
-
 @external
 func initializer{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     owner: felt, recipient: felt, proxy_admin: felt
 ) {
-    let (called: felt) = call_once.read();
-    assert called = 0;
     ERC20.initializer('TOKEN', 'TK', 18);
     Ownable.initializer(owner);
     Proxy.initializer(proxy_admin);
