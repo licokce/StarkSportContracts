@@ -61,10 +61,6 @@ func owner_address() -> (owner_contract_address: felt) {
 }
 
 @storage_var
-func call_once() -> (called: felt) {
-}
-
-@storage_var
 func max_supply() -> (supply: Uint256) {
 }
 
@@ -87,8 +83,6 @@ func initializer{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr
     collection_number: Uint256,
     proxy_admin: felt,
 ) {
-    let (called: felt) = call_once.read();
-    assert called = 0;
     ERC721.initializer(name, symbol);
     Proxy.initializer(proxy_admin);
     ERC721Enumerable.initializer();
